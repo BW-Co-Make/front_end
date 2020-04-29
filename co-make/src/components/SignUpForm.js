@@ -2,7 +2,7 @@ import React from 'react'
 import * as yup from "yup"
 import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { addNewUser } from "../store/actions/formActions";
+import { addNewUser } from "../store/actions/userActions";
 import { useForm } from "react-hook-form"
 
 const schema = yup.object().shape({
@@ -20,8 +20,8 @@ const SignUpForm = (props) => {
   })
 
 const onSubmit = data => {
+  props.addNewUser(data)
   push("/login")
-  addNewUser(data)
 }
 
   return (

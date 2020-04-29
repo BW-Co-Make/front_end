@@ -7,17 +7,21 @@ const initialState = {
     isFetching: ''
 }
 
-export const formReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
     switch(action.type){
         // Sign Up Cases
         case 'ADD_NEWUSER_START': 
-        return (
-            console.log("hey")
-        )
+        return {
+            ...state,
+        }
         case 'ADD_NEWUSER_SUCCESS': 
         return {
             ...state,
-            error:''
+            firstName: action.payload.first_name,
+            lastName: action.payload.last_name,
+            userName: action.payload.username,
+            location: action.payload.zip_code,
+            isFetching: false
         }
 
         case 'ADD_NEWUSER_FAILURE': 

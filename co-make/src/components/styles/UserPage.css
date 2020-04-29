@@ -1,0 +1,41 @@
+.userInfoTitle {
+    font-size: 300%;
+    margin-bottom: 5%;
+}
+
+.userPageDiv {
+    margin: auto;
+    margin-top: 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userMapDiv {
+    margin: auto;
+}
+
+.userMapDiv form{
+    margin-left: 17%;
+}
+
+.userEditButton {
+    font-size: 150%;
+    margin-left: 1%;
+}
+
+.userEditButton:hover {
+    cursor: pointer;
+}
+
+.userMapDiv input:disabled {
+    text-decoration: none;
+    color: white;
+    background-color: maroon;
+    border: 1px solid maroon;
+}
+
+.moveLeftHeaders {
+    margin-right: 7%;
+}

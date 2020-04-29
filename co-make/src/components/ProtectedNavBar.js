@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import "./styles/NavBar.css";
-// import DropdownMenu from "./DropdownMenu";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FaUserAlt } from "react-icons/fa";
-import { withRouter } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const ProtectedNavBar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const { push } = useHistory();
+    const { id } = useParams();
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
+
+    const userDropdown = e => {
+        push(`/profile/${id}`)
+    }
 
     return (
         <div className={"bigDiv"}>
@@ -19,13 +24,13 @@ const ProtectedNavBar = () => {
                     <FaUserAlt />{" "}
                     </DropdownToggle>
                 <DropdownMenu style={{left: "-100px"}} className={"dropDownBackgroundColor"}>
-                    <DropdownItem className={"dropDownColor"}>Profile</DropdownItem>
+                    <DropdownItem className={"dropDownColor"} onClick={userDropdown}>Profile</DropdownItem>
                     <DropdownItem divider />
                     <DropdownItem className={"dropDownColor"}>Your posts</DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem className={"dropDownColor"}>Github</DropdownItem>
+                    <a href="https://github.com/BW-Co-Make" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"} >Github</DropdownItem></a>
                     <DropdownItem divider />
-                    <DropdownItem className={"dropDownColor"}>About</DropdownItem>
+                    <a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D0%B3%D0%B3,_%D0%94%D0%B6%D0%B5%D0%B9%D0%BC%D1%81" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"}>About</DropdownItem></a>
                     <DropdownItem divider />
                     <DropdownItem className={"dropDownColor"}>Logout</DropdownItem>
                 </DropdownMenu>

@@ -1,5 +1,6 @@
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import axios from 'axios'
+import { useParams } from 'react-router-dom';
 
 // signup action
 export const addNewUser = newUser => {
@@ -19,7 +20,6 @@ export const addNewUser = newUser => {
     }
 }
 
-
 //login action
 export const userLogin = user => {
     console.log("User Login Info", user)
@@ -38,17 +38,16 @@ export const userLogin = user => {
     }
 }
 
-
-// fetch user action
-export const fetchUser = user => {
-    console.log("User Info", user)
+//fetching user action
+export const fetchUser = () => {
+    console.log("Getting User Info...")
     return dispatch => {
-        dispatch({type: 'FETCH_USER_START', payload: user })
-        axiosWithAuth()
-        .get("/api/auth/login", user)
+        dispatch({type: 'FETCH_USER_START'})
+        const { id } = useParams()
+        return axiosWithAuth()
+        .get(`/api/users/${id}`)
         .then(res => {
-            dispatch({type: 'FETCH_USER_SUCCESS', payload: user })
-            localStorage.setItem('token', JSON.stringify(res.data.payload));
+            dispatch({type: 'FETCH_USER_SUCCESS', payload: res.data })
         })
         .catch(error => {
             dispatch({type: 'FETCH_USER_FAIL', payload: error })

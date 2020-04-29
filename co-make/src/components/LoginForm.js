@@ -1,10 +1,9 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Link, useHistory } from "react-router-dom"
 import * as yup from "yup"
 import { connect } from "react-redux"
-import { userLogin } from "../store/actions/formActions";
+import { userLogin } from "../store/actions/userActions";
 // import { formReducer } from "../store/reducers/formReducer"
-import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useForm } from "react-hook-form"
 import './styles/LoginForm.css'
 
@@ -20,13 +19,9 @@ const LoginForm = props => {
   })
 
 const onSubmit = data => {
-  userLogin(data)
+  props.userLogin(data)
   push("/issues")
 }
-
-useEffect(() => {
-  axiosWithAuth().get("/api/users").then(res => {console.log(res.data)})
-}, [])
 
   return (
   <>  
