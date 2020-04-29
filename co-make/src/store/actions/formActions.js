@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { axiosWithAuth } from '../../utils/axiosWithAuth'
 
 export const addNewUser = (newUser) => {
@@ -6,7 +5,7 @@ export const addNewUser = (newUser) => {
     return dispatch => {
         dispatch({type: 'ADD_NEWUSER_START'})
         axiosWithAuth()
-        .post("", newUser)
+        .post("/api/auth/register", newUser)
         .then(response => {
             dispatch({type: 'ADD_NEWUSER_SUCCESS', payload: newUser })
             console.log(response)
@@ -23,7 +22,7 @@ export const userLogin = (user) => {
     return dispatch => {
         dispatch({type: 'FETCH_USER_START', payload: user })
         axiosWithAuth()
-        .post("/api/login", user)
+        .post("/api/auth/login", user)
         .then(res => {
             dispatch({type: 'FETCH_USER_SUCCESS', payload: user })
             localStorage.setItem('token', JSON.stringify(res.data.payload));

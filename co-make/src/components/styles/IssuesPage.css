@@ -1,0 +1,31 @@
+.issues-container {
+    padding-top: 85px;
+    background-color: #f5f3da;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.issuescard-container{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.issuescard{
+    margin: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    width: 500px;
+}
+
+.issues-container h1 {
+  /* color: #760111; */
+}
+
