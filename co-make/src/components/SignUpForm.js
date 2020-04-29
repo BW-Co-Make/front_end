@@ -1,6 +1,6 @@
 import React from 'react'
 import * as yup from "yup"
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { addNewUser } from "../store/actions/formActions";
 import { useForm } from "react-hook-form"
@@ -14,14 +14,14 @@ const schema = yup.object().shape({
     });
 
 const SignUpForm = (props) => {
-
-  
+  const { push } = useHistory();  
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   })
 
 const onSubmit = data => {
-  console.log(data)
+  push("/login")
+  addNewUser(data)
 }
 
   return (
@@ -36,10 +36,8 @@ const onSubmit = data => {
               name="firstname"
               ref={register}
             />
+            {errors.firstname && <p className="error">{errors.firstname.message}</p>}
           </label>
-          {errors.firstname && <p className="error">{errors.firstname.message}</p>}
-          <br/>
-
           <label htmlFor="lastname">
             <input 
             placeholder="Last name*"
@@ -47,10 +45,8 @@ const onSubmit = data => {
             name="lastname"
             ref={register}
             />
+            {errors.lastname && <p className="error">{errors.lastname.message}</p>}
           </label>
-          {errors.lastname && <p className="error">{errors.lastname.message}</p>}
-          <br/>
-
           <label htmlFor="username">
             <input 
               placeholder="Username*"
@@ -58,10 +54,8 @@ const onSubmit = data => {
               name="username"
               ref={register}
             />
+            {errors.username && <p className="error">{errors.username.message}</p>}
           </label>
-          {errors.username && <p className="error">{errors.username.message}</p>}
-          <br/>
-
           <label htmlFor="password">
             <input 
               placeholder="Password*"
@@ -69,11 +63,8 @@ const onSubmit = data => {
               name="password"
               ref={register}
             />
-          </label>
-          {errors.password && <p className="error">{errors.password.message}</p>}
-          <br/>
-
-          
+            {errors.password && <p className="error">{errors.password.message}</p>}
+          </label> 
           <label htmlFor="zipcode">
             <input 
             placeholder="Zipcode*"
@@ -82,14 +73,12 @@ const onSubmit = data => {
             minLength="5"
             ref={register}
             />
+            {errors.location && <p className="error">{errors.location.message}</p>}
           </label>
-          {errors.location && <p className="error">{errors.location.message}</p>}
-          <br/>
-
           <button>Sign Up</button>
-          <p>Already have an account? <Link to="/login">Login</Link></p>
         </form>
       </div>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   )
 }

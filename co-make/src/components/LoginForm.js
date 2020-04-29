@@ -1,10 +1,10 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect } from "react"
+import { Link, useHistory } from "react-router-dom"
 import * as yup from "yup"
 import { connect } from "react-redux"
 import { userLogin } from "../store/actions/formActions";
 // import { formReducer } from "../store/reducers/formReducer"
-// import { axiosWithAuth } from '../utils/axiosWithAuth'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useForm } from "react-hook-form"
 import './styles/LoginForm.css'
 
@@ -14,13 +14,19 @@ const schema = yup.object().shape({
 });
 
 const LoginForm = props => {
+  const { push } = useHistory();
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   })
 
 const onSubmit = data => {
-  console.log(data)
+  userLogin(data)
+  push("/issues")
 }
+
+useEffect(() => {
+  axiosWithAuth().get("/api/users").then(res => {console.log(res.data)})
+}, [])
 
   return (
   <>  
@@ -49,7 +55,7 @@ const onSubmit = data => {
           <button>Log In</button>
         </form>
       </div>
-      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      <p>Don't have an account? <Link to="/">Sign Up</Link></p>
     </div>
   </>   
   )

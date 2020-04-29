@@ -11,9 +11,9 @@ export const formReducer = (state = initialState, action) => {
     switch(action.type){
         // Sign Up Cases
         case 'ADD_NEWUSER_START': 
-        return {
-            ...state,
-        }
+        return (
+            console.log("hey")
+        )
         case 'ADD_NEWUSER_SUCCESS': 
         return {
             ...state,
