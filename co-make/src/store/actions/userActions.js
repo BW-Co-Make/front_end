@@ -38,7 +38,7 @@ export const userLogin = (user, push) => {
 
 //fetching user action
 export const fetchUser = (id) => {
-    console.log("Getting User Info...")
+    // console.log("Getting User Info...", id)
     return dispatch => {
         dispatch({type: 'FETCH_USER_START'})
         return axiosWithAuth()
