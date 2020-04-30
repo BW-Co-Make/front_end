@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
-import { useParams, useHistory } from "react-router-dom"
 import { axiosWithAuth } from "../utils/axiosWithAuth"
 import './styles/UserPage.css'
 import { AiFillEdit } from "react-icons/ai";
@@ -13,8 +12,8 @@ const UserPage = props => {
     const [disabled1, setDisabled1] = useState(true);
     const [disabled2, setDisabled2] = useState(true);
     const [disabled3, setDisabled3] = useState(true);
-    const [disabled4, setDisabled4] = useState(true);
-    const [disabled5, setDisabled5] = useState(true);
+    // const [disabled4, setDisabled4] = useState(true);
+    // const [disabled5, setDisabled5] = useState(true);
     
     const [userFormData, setUserFormData] = useState({});
     const [dataPushedUp, setDataPushedUp] = useState({})
@@ -22,6 +21,7 @@ const UserPage = props => {
     useEffect(() => {
         const token = localStorage.getItem('token')
         const userInfo = jwt.decode(token)
+        console.log(userInfo)
         props.fetchUser(userInfo.userId)
     }, [])
 
@@ -37,8 +37,8 @@ const UserPage = props => {
         })
     }, [props.isFetching])
 
-    // console.log("THIS IS Data Pushed", dataPushedUp);
-    // console.log("THIS IS USER FORM DATA", userFormData)
+    console.log("THIS IS DATA PUSHED UP", dataPushedUp);
+    console.log("THIS IS USER FORM DATA", userFormData);
 
     const handleChange = e => {
         e.preventDefault();
@@ -53,7 +53,7 @@ const UserPage = props => {
             id: userFormData.id,
             username: userFormData.username,
             first_name: userFormData.firstName,
-            last_name: userFormData.lastName,
+            last_name: userFormData.lastName
         })
         console.log("This is SUCCESS from SUCCESS", dataPushedUp)
         e.preventDefault();

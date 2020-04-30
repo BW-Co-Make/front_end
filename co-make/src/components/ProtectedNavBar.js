@@ -19,6 +19,11 @@ const ProtectedNavBar = () => {
         console.log("hey")
     }
 
+    const logout = e => {
+        localStorage.removeItem('token')
+        push("/login")
+    }
+
     return (
         <div className={"bigDiv"}>
             <h1 className={"headerTitle"}>Co-Make</h1>
@@ -36,7 +41,7 @@ const ProtectedNavBar = () => {
                     <DropdownItem divider />
                     <a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D0%B3%D0%B3,_%D0%94%D0%B6%D0%B5%D0%B9%D0%BC%D1%81" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"}>About</DropdownItem></a>
                     <DropdownItem divider />
-                    <DropdownItem className={"dropDownColor"}>Logout</DropdownItem>
+                    <DropdownItem className={"dropDownColor"} onClick={logout}>Logout</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
         </div>
