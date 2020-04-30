@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-
 const initialState = {
     isFetching: false,
     user: {}

@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./styles/NavBar.css";
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FaUserAlt } from "react-icons/fa";
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
+import { fetchUser } from '../store/actions/userActions'
+import { connect } from 'react-redux'
+import jwt from 'jsonwebtoken'
 
-const ProtectedNavBar = () => {
+
+const ProtectedNavBar = props => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const { push } = useHistory();
-    const { id } = useParams();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        const userInfo = jwt.decode(token)
+        props.fetchUser(userInfo.userId)
+        // console.log(userInfo)
+    }, [])
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
     const pushToProfile = e => {
-        push(`/profile/${id}`)
+        push(`/profile/${props.user.username}`)
     }
 
-    const pushToIssues = e => {
-        console.log("hey")
+    const pushToUsersIssues = e => {
+        push(`/your-posts/${props.user.username}`)
     }
 
     const logout = e => {
@@ -26,7 +36,7 @@ const ProtectedNavBar = () => {
 
     return (
         <div className={"bigDiv"}>
-            <h1 className={"headerTitle"}>Co-Make</h1>
+            <Link to="/issues"><h1 className={"headerTitle"}>Co-Make</h1></Link>
 
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle style={{backgroundColor: "maroon"}} caret>
@@ -35,7 +45,7 @@ const ProtectedNavBar = () => {
                 <DropdownMenu style={{left: "-100px"}} className={"dropDownBackgroundColor"}>
                     <DropdownItem className={"dropDownColor"} onClick={pushToProfile}>Profile</DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem className={"dropDownColor"} onClick={pushToIssues}>Your posts</DropdownItem>
+                    <DropdownItem className={"dropDownColor"} onClick={pushToUsersIssues}>Your posts</DropdownItem>
                     <DropdownItem divider />
                     <a href="https://github.com/BW-Co-Make" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"} >Github</DropdownItem></a>
                     <DropdownItem divider />
@@ -48,4 +58,11 @@ const ProtectedNavBar = () => {
     )
 }
 
-export default ProtectedNavBar
+const mapStateToProps = state => {
+    return {
+        user: state.user.user,
+        isFetching: state.user.isFetching
+    }
+}
+
+export default connect(mapStateToProps, { fetchUser })(ProtectedNavBar)

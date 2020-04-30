@@ -37,8 +37,12 @@
     background: maroon;
 }
 
-.headerTitle {
+.headerTitle{
     color: maroon;
+}
+
+.bigDiv a{
+    text-decoration: none;
 }
 
 .dropDownDiv {

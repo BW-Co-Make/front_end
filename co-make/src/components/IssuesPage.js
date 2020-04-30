@@ -13,7 +13,7 @@ const IssuesPage = () => {
         axiosWithAuth()
         .get(`api/issues`)
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             setUserData(response.data)
         })
         .catch(error => {
