@@ -1,6 +1,6 @@
 [build]
 base = "co-make/"
-publish = "co-make/build/"
+publish = "build/"
 command = "yarn build"
 [[redirects]]
 from = "/*"
