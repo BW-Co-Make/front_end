@@ -13,7 +13,7 @@ const UserPage = props => {
     const [disabled2, setDisabled2] = useState(true);
     const [disabled3, setDisabled3] = useState(true);
     // const [disabled4, setDisabled4] = useState(true);
-    // const [disabled5, setDisabled5] = useState(true);
+    const [disabled5, setDisabled5] = useState(true);
     
     const [userFormData, setUserFormData] = useState({});
     const [dataPushedUp, setDataPushedUp] = useState({})
@@ -33,39 +33,35 @@ const UserPage = props => {
             lastName: props.user.last_name,
             username: props.user.username,
             // password: props.user.password,
-            // location: props.user.zip_code
+            location: props.user.zip_code
         })
     }, [props.isFetching])
 
-    console.log("THIS IS DATA PUSHED UP", dataPushedUp);
-    console.log("THIS IS USER FORM DATA", userFormData);
+    // console.log("THIS IS DATA PUSHED UP", dataPushedUp);
+    // console.log("THIS IS USER FORM DATA", userFormData);
 
     const handleChange = e => {
-        e.preventDefault();
         setUserFormData({
             ...userFormData,
             [e.target.name]: e.target.value
         })
+       setDataPushedUp(userFormData)
+       console.log("this is data pushed up in handlechange", dataPushedUp)
+        // console.log(userFormData)
     }
 
     const handleSubmit = e => {
-        setDataPushedUp({
-            id: userFormData.id,
-            username: userFormData.username,
-            first_name: userFormData.firstName,
-            last_name: userFormData.lastName
-        })
-        console.log("This is SUCCESS from SUCCESS", dataPushedUp)
+        const { id, username, firstName, lastName, location } = userFormData
+        console.log("This is DATA", dataPushedUp)
         e.preventDefault();
         axiosWithAuth()
-        .put(`/api/users/${props.user.id}`, dataPushedUp)
+        .put(`/api/users/${props.user.id}`, {id, username, first_name:firstName, last_name:lastName, zip_code:location })
         .then(response => {
             console.log(response)
-            console.log("This is SUCCESS from SUCCESS", dataPushedUp)
-
+            console.log("This is SUCCESS from SUCCESS", {id, username, first_name:firstName, last_name:lastName, zip_code:location })
         })
         .catch(error => {
-            console.log("This is error from error", dataPushedUp)
+            console.log("This is error from error")
             console.log(error)
         })
     }    
@@ -129,7 +125,7 @@ const UserPage = props => {
                     </label>
                     <AiFillEdit className={"userEditButton"} onClick={() => setDisabled4(!disabled4)}/> */}
 
-                    {/* <h4 className={"moveLeftHeaders"}>Zipcode:</h4>
+                    <h4 className={"moveLeftHeaders"}>Zipcode:</h4>
                     <label htmlFor="update location">
                         <input 
                             name="location"
@@ -140,7 +136,7 @@ const UserPage = props => {
                             disabled={disabled5}
                         />
                     </label>
-                    <AiFillEdit className={"userEditButton"} onClick={() => setDisabled5(!disabled5)}/> */}
+                    <AiFillEdit className={"userEditButton"} onClick={() => setDisabled5(!disabled5)}/>
                     <button>Update Info</button>
                 </form>
             </div>

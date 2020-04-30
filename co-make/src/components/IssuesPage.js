@@ -11,7 +11,7 @@ const IssuesPage = () => {
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`api/issues/`)
+        .get(`api/issues`)
         .then(response => {
             console.log(response.data)
             setUserData(response.data)
