@@ -1,49 +1,41 @@
+import jwt from 'jsonwebtoken'
+
 const initialState = {
-    firstName: '',
-    lastName: '',
-    userName: '',
-    password: '',
-    location: '',
-    isFetching: ''
+    isFetching: false,
+    user: {}
 }
 
 export const userReducer = (state = initialState, action) => {
     switch(action.type){
-        // Sign Up Cases
-        case 'ADD_NEWUSER_START': 
+        // Log In Actions
+        case 'LOGIN_USER_SUCCESS': 
         return {
             ...state,
-        }
-        case 'ADD_NEWUSER_SUCCESS': 
-        return {
-            ...state,
-            firstName: action.payload.first_name,
-            lastName: action.payload.last_name,
-            userName: action.payload.username,
-            location: action.payload.zip_code,
-            isFetching: false
+            isFetching: false,
         }
 
-        case 'ADD_NEWUSER_FAILURE': 
+        case 'LOGIN_USER_FAILURE': 
         return {
             ...state,
-            error: action.payload
+            isFetching: false,
         }
 
-        // Log In Cases
+        // Fetch User Actions
         case 'FETCH_USER_START': 
         return {
-            ...state,
+            isFetching: true,
+            user: action.payload
         }
+
         case 'FETCH_USER_SUCCESS': 
         return {
-            ...state,
-            error:''
+            user: action.payload,
+            isFetching: false
         }
 
         case 'FETCH_USER_FAILURE': 
         return {
-            ...state,
+            isFetching: false,
             error: action.payload
         }
         default:

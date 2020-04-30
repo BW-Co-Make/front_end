@@ -1,7 +1,6 @@
 import React from 'react'
 
 const IssuesCard = props => {
-    console.log(props.userData)
     return(
         <div className="issuescard-container">
             {props.userData.map(item => {

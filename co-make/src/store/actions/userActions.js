@@ -1,49 +1,46 @@
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import jwt from 'jsonwebtoken'
 
-// signup action
+// Sign up action
 export const addNewUser = newUser => {
-    return dispatch => {
-        dispatch({type: 'ADD_NEWUSER_START'})
+    return () => {
         return axios
-        .post("/api/auth/register", newUser)
+        .post("https://co-make-bw.herokuapp.com/api/auth/register", newUser)
         .then(response => {   
             console.log(response)
-            console.log("hey")        
-            dispatch({type: 'ADD_NEWUSER_SUCCESS', payload: newUser })
         })
         .catch(error => {
-            dispatch({type: 'ADD_NEWUSER_FAIL', payload: error })
             console.log(error)
         })
     }
 }
 
-//login action
-export const userLogin = user => {
-    console.log("User Login Info", user)
+// Log In action
+export const userLogin = (user, push) => {
+    console.log("User Login Info:", user)
     return dispatch => {
-        dispatch({type: 'FETCH_USER_START', payload: user })
         axiosWithAuth()
         .post("/api/auth/login", user)
         .then(res => {
-            dispatch({type: 'FETCH_USER_SUCCESS', payload: user })
-            localStorage.setItem('token', JSON.stringify(res.data.payload));
+            const token = res.data.token
+            localStorage.setItem('token', token);
+            dispatch({type: 'LOGIN_USER_SUCCESS' })
+            push("/issues")
         })
         .catch(error => {
-            dispatch({type: 'FETCH_USER_FAIL', payload: error })
+            dispatch({type: 'LOGIN_USER_FAIL', payload: error })
             console.log(error)
         })
     }
 }
 
 //fetching user action
-export const fetchUser = () => {
+export const fetchUser = (id) => {
     console.log("Getting User Info...")
     return dispatch => {
         dispatch({type: 'FETCH_USER_START'})
-        const { id } = useParams()
         return axiosWithAuth()
         .get(`/api/users/${id}`)
         .then(res => {

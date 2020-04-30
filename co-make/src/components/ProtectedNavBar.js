@@ -11,8 +11,12 @@ const ProtectedNavBar = () => {
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
-    const userDropdown = e => {
+    const pushToProfile = e => {
         push(`/profile/${id}`)
+    }
+
+    const pushToIssues = e => {
+        console.log("hey")
     }
 
     return (
@@ -24,9 +28,9 @@ const ProtectedNavBar = () => {
                     <FaUserAlt />{" "}
                     </DropdownToggle>
                 <DropdownMenu style={{left: "-100px"}} className={"dropDownBackgroundColor"}>
-                    <DropdownItem className={"dropDownColor"} onClick={userDropdown}>Profile</DropdownItem>
+                    <DropdownItem className={"dropDownColor"} onClick={pushToProfile}>Profile</DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem className={"dropDownColor"}>Your posts</DropdownItem>
+                    <DropdownItem className={"dropDownColor"} onClick={pushToIssues}>Your posts</DropdownItem>
                     <DropdownItem divider />
                     <a href="https://github.com/BW-Co-Make" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"} >Github</DropdownItem></a>
                     <DropdownItem divider />

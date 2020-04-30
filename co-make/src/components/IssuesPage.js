@@ -3,7 +3,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'
 import { useParams } from 'react-router-dom'
 import IssuesCard from './IssuesCard'
 import "./styles/IssuesPage.css"
-import ProtectedNavBar from "./ProtectedNavBar";
+import ProtectedNavBar from "../components/ProtectedNavBar"
 
 const IssuesPage = () => {
     const [userData, setUserData] = useState([]);
@@ -11,7 +11,7 @@ const IssuesPage = () => {
 
     useEffect(() => {
         axiosWithAuth()
-        .get(`api/locations/issues/3`)
+        .get(`api/issues/`)
         .then(response => {
             console.log(response.data)
             setUserData(response.data)
@@ -25,7 +25,7 @@ const IssuesPage = () => {
         <>
             <ProtectedNavBar/>
             <div className="issues-container">
-                <h1>Hello from Issues Page!</h1>
+                <h1>Issues from around the World</h1>
                 <IssuesCard userData={userData}/>
             </div>
         </>

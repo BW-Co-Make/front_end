@@ -1,9 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import * as yup from "yup"
 import { connect } from "react-redux"
-import { userLogin } from "../store/actions/userActions";
-// import { formReducer } from "../store/reducers/formReducer"
+import { userLogin, fetchUser } from "../store/actions/userActions";
 import { useForm } from "react-hook-form"
 import './styles/LoginForm.css'
 
@@ -19,8 +18,7 @@ const LoginForm = props => {
   })
 
 const onSubmit = data => {
-  props.userLogin(data)
-  push("/issues")
+  props.userLogin(data, push)
 }
 
   return (
@@ -57,4 +55,4 @@ const onSubmit = data => {
 }
 
 
-export default connect(null, { userLogin })(LoginForm); 
+export default connect(null, { userLogin, fetchUser })(LoginForm); 

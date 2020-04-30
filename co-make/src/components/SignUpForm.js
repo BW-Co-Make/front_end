@@ -6,10 +6,10 @@ import { addNewUser } from "../store/actions/userActions";
 import { useForm } from "react-hook-form"
 
 const schema = yup.object().shape({
-      firstname: yup.string().required("First Name is required").min(2, "Must be at least 2 characters"),
-      lastname: yup.string().required("Last Name is required").min(2, "Must be at least 2 characters"),
+      first_name: yup.string().required("First Name is required").min(2, "Must be at least 2 characters"),
+      last_name: yup.string().required("Last Name is required").min(2, "Must be at least 2 characters"),
       password: yup.string().min(6, "Password must be at least 6 characters long").required("Password is required"),
-      location: yup.string().min(5, "Zip Code must be at least 5 characters long").required("Zip Code is required"),
+      zip_code: yup.string().min(5, "Zip Code must be at least 5 characters long").required("Zip Code is required"),
       username: yup.string().required("Username is required").min(2, "Must be at least 2 characters")
     });
 
@@ -33,7 +33,7 @@ const onSubmit = data => {
             <input 
               placeholder="First Name*"
               type="text"
-              name="firstname"
+              name="first_name"
               ref={register}
             />
             {errors.firstname && <p className="error">{errors.firstname.message}</p>}
@@ -42,7 +42,7 @@ const onSubmit = data => {
             <input 
             placeholder="Last name*"
             type="text"
-            name="lastname"
+            name="last_name"
             ref={register}
             />
             {errors.lastname && <p className="error">{errors.lastname.message}</p>}
@@ -69,7 +69,7 @@ const onSubmit = data => {
             <input 
             placeholder="Zipcode*"
             type="text"
-            name="location"
+            name="zip_code"
             minLength="5"
             ref={register}
             />
