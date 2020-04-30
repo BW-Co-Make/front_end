@@ -49,7 +49,7 @@ const ProtectedNavBar = props => {
                     <DropdownItem divider />
                     <a href="https://github.com/BW-Co-Make" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"} >Github</DropdownItem></a>
                     <DropdownItem divider />
-                    <a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D0%B3%D0%B3,_%D0%94%D0%B6%D0%B5%D0%B9%D0%BC%D1%81" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"}>About</DropdownItem></a>
+                    <a href="https://frosty-bhaskara-b72a89.netlify.app/about.html" style={{textDecoration: "none"}} target="_blank"><DropdownItem className={"dropDownColor"}>About</DropdownItem></a>
                     <DropdownItem divider />
                     <DropdownItem className={"dropDownColor"} onClick={logout}>Logout</DropdownItem>
                 </DropdownMenu>

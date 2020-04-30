@@ -7,9 +7,8 @@ import { deletePost } from "../store/actions/issueActions";
 import jwt from 'jsonwebtoken';
 
 const UserIssuesCard = props => {
-    props.issues && console.log("issues", props.issues);
-
     const [editData, setEditData] = useState({})
+    const [issue, setIssue] = useState({})
 
     useEffect(() => {
         props.issues && setEditData({
@@ -24,40 +23,20 @@ const UserIssuesCard = props => {
             [e.target.name]: e.target.value
         })
     }
-    
+
     return (
     <div className={"issuescard-container"}>
-        {
-            props.issues && props.issues.map(item => {
-                // console.log("itemitemitemitemitem",item);
+        {props.issues && props.issues.map(item => {
                 return(
                 <div key={item.id} className={"issuescard userCard"}>
-                    <AiFillEdit className={"editUsersCard"}/>
+                    
+                    <h2>{item.title}</h2>
+                    <h3>{item.post}</h3>
+                    <h3>{item.zip_code}</h3>
                     <AiFillDelete className={"deleteUsersCard"} onClick={() => {props.deletePost(props.issues, item.id)}}/>
-                    <form>
-                        <label>
-                            <input 
-                                name="title"
-                                type="text"
-                                value={editData.Title}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        
-                        <label>
-                            <input 
-                                name="post"
-                                type="text"
-                                value={editData.Post}
-                                onChange={handleChange}
-                            />
-                        </label>
-                        <h3>{item.zip_code}</h3>
-                    </form>
                 </div>
                 )
-            })
-        }
+            })}
     </div>
     )
 }

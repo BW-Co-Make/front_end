@@ -19,9 +19,8 @@ import { addPost, renderUserPosts } from "../store/actions/issueActions";
 // post URL: /api/issues
 
 const UsersIssuesPage = props => {
-    // console.log(props)
     const [userFormData, setUserFormData] = useState({
-        title: "",
+        title: "hey from body",
         body: ""
     })
 

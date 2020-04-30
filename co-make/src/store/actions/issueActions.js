@@ -10,7 +10,7 @@ export const renderUserPosts = id => {
         .get(`/api/users/${id}/issues`)
         .then(response => {
             dispatch({type: "FETCH_POSTS_SUCCESS", payload: response.data.issues})
-            console.log("FETCH_POSTS_SUCCESS", response.data.issues)
+            // console.log("FETCH_POSTS_SUCCESS", response.data.issues)
         })
         .catch(error => {
             dispatch({type: "FETCH_POSTS_FAIL"})
